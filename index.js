@@ -2,9 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const imghash = require('imghash');
 const axios = require('axios');
+const cors = require('cors');
 const fs = require('fs')
 const app = express();
-const app = cors();
 const port = 5678;
 
 app.use(cors())
