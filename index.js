@@ -4,8 +4,10 @@ const imghash = require('imghash');
 const axios = require('axios');
 const fs = require('fs')
 const app = express();
+const app = cors();
 const port = 5678;
 
+app.use(cors())
 app.use(bodyParser.json());
 
 const downloadMedia = (url, filename) =>
