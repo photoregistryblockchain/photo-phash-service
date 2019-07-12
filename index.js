@@ -30,11 +30,15 @@ app.post('/', async (req, res) => {
   const { url } = req.body;
   const filename = Math.random().toString()
   if (url) {
-    await downloadMedia(url, filename)
-    const hash = await imghash.hash(filename)
-    res.send(hash);
+    try {
+      await downloadMedia(url, filename)
+      const hash = await imghash.hash(filename)
+      res.send(hash);
+      cleanMedia(filename);
+    } catch (err) {
+      res.sendStatus(500);
+    }
   }
-  cleanMedia(filename);
   res.end();
 });
 
