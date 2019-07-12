@@ -24,7 +24,7 @@ const downloadMedia = (url, filename) =>
       }),
   );
 
-const cleanMedia = (filename) =>  fs.unlinkSync(filename)
+const cleanMedia = (filename) => fs.unlinkSync(filename)
 
 app.post('/', async (req, res) => {
   const { url } = req.body;
@@ -34,11 +34,13 @@ app.post('/', async (req, res) => {
       await downloadMedia(url, filename)
       const hash = await imghash.hash(filename)
       res.send(hash);
-      cleanMedia(filename);
     } catch (err) {
       res.sendStatus(500);
     }
   }
+  try {
+    cleanMedia(filename);
+  } catch (err) { }
   res.end();
 });
 
